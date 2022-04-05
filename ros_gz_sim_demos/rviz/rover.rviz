@@ -5,9 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
-        - /RobotModel1
-        - /TF1
+        - /LaserScan1/Topic1
+        - /PointCloud21/Topic1
       Splitter Ratio: 0.5
     Tree Height: 519
   - Class: rviz_common/Selection
@@ -67,22 +66,32 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        left_front_wheel_link:
+        front_left_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        left_rear_wheel_link:
+        front_right_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        right_front_wheel_link:
+        imu_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        right_rear_wheel_link:
+        lidar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_right_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -99,13 +108,19 @@ Visualization Manager:
         All Enabled: true
         base_link:
           Value: true
-        left_front_wheel_link:
+        front_left_wheel_link:
           Value: true
-        left_rear_wheel_link:
+        front_right_wheel_link:
           Value: true
-        right_front_wheel_link:
+        imu_link:
           Value: true
-        right_rear_wheel_link:
+        lidar_link:
+          Value: true
+        rear_left_wheel_link:
+          Value: true
+        rear_right_wheel_link:
+          Value: true
+        rover/base_link/gpu_lidar:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -114,20 +129,93 @@ Visualization Manager:
       Show Names: true
       Tree:
         base_link:
-          left_front_wheel_link:
+          front_left_wheel_link:
             {}
-          left_rear_wheel_link:
+          front_right_wheel_link:
             {}
-          right_front_wheel_link:
+          imu_link:
             {}
-          right_rear_wheel_link:
+          lidar_link:
+            rover/base_link/gpu_lidar:
+              {}
+          rear_left_wheel_link:
+            {}
+          rear_right_wheel_link:
             {}
       Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: true
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.05000000074505806
+      Style: Boxes
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /lidar
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 1.438473105430603
+        Min Value: -0.30488887429237366
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 0
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.05000000074505806
+      Style: Spheres
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /lidar/points
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: rover/base_link/gpu_lidar
     Frame Rate: 30
   Name: root
   Tools:
@@ -170,25 +258,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.6996164321899414
+      Distance: 19.0819034576416
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.029804222285747528
-        Y: 0.026924394071102142
-        Z: -0.06663914769887924
+        X: 0.25728100538253784
+        Y: 0.09391110390424728
+        Z: -0.17473050951957703
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5397973656654358
+      Pitch: 1.509796380996704
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.8054015636444092
+      Yaw: 3.1353914737701416
     Saved: ~
 Window Geometry:
   Displays:

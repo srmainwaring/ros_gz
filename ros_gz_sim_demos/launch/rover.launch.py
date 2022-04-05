@@ -46,10 +46,22 @@ def generate_launch_description():
     )
 
     # Spawn
+    # 
+    # spawn the model published on the topic 'robot_description'
+    # into the current world with the name 'rover'. Adjust the pose
+    # as required.
     spawn = Node(package='ros_ign_gazebo', executable='create',
         arguments=[
+            '-world', '',
+            '-param', '',
             '-name', 'rover',
             '-topic', 'robot_description',
+            '-x', '0.0',
+            '-y', '0.0',
+            '-z', '0.5',
+            '-R', '0.0',
+            '-P', '0.0',
+            '-Y', '0.0',
         ],
         output='screen',
     )
@@ -61,11 +73,25 @@ def generate_launch_description():
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
             '/world/empty/model/rover/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+            '/world/empty/model/rover/link/base_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU',
+            '/lidar@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
+            '/lidar/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
         ],
         remappings=[
             ('/world/empty/model/rover/joint_state', 'joint_states'),
+            ('/world/empty/model/rover/link/base_link/sensor/imu_sensor/imu', 'sensors/imu'),
+            ('/lidar', 'sensors/laser_scan'),
+            ('/lidar/points', 'sensors/laser_scan/points'),
         ],
         output='screen'
+    )
+
+    # tf2 static broadcaster
+    static_broadcaster = Node(
+        package='ros_ign_rover',
+        executable='tf2_broadcaster',
+        arguments=[
+        ],
     )
 
     return LaunchDescription(
@@ -76,5 +102,6 @@ def generate_launch_description():
             bridge,
             robot_state_publisher,
             rviz,
+            static_broadcaster,
         ]
     )
