@@ -10,6 +10,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra)
 endif()
 
+find_package(gz-cmake3 REQUIRED)
+find_package(TINYXML2 REQUIRED)
+
 find_package(ament_cmake REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(ros_gz_bridge REQUIRED)
