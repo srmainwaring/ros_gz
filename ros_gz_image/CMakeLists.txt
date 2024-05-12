@@ -16,11 +16,45 @@ find_package(ros_gz_bridge REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
-find_package(gz_transport_vendor REQUIRED)
-find_package(gz-transport REQUIRED)
+if("$ENV{GZ_VERSION}" STREQUAL "harmonic" OR NOT DEFINED "ENV{GZ_VERSION}")
+  # Harmonic (default)
 
-find_package(gz_msgs_vendor REQUIRED)
-find_package(gz-msgs REQUIRED)
+  find_package(gz-transport13 REQUIRED)
+  set(GZ_TRANSPORT_VER ${gz-transport13_VERSION_MAJOR})
+
+  find_package(gz-msgs10 REQUIRED)
+  set(GZ_MSGS_VER ${gz-msgs10_VERSION_MAJOR})
+
+  message(STATUS "Compiling against Gazebo Harmonic")
+elseif("$ENV{GZ_VERSION}" STREQUAL "ionic")
+  # Ionic
+
+  find_package(gz-transport14 REQUIRED)
+  set(GZ_TRANSPORT_VER ${gz-transport14_VERSION_MAJOR})
+
+  find_package(gz-msgs11 REQUIRED)
+  set(GZ_MSGS_VER ${gz-msgs11_VERSION_MAJOR})
+
+  message(STATUS "Compiling against Gazebo Ionic")
+elseif("$ENV{GZ_VERSION}" STREQUAL "garden")
+  # Garden
+
+  find_package(gz-transport12 REQUIRED)
+  set(GZ_TRANSPORT_VER ${gz-transport12_VERSION_MAJOR})
+
+  find_package(gz-msgs9 REQUIRED)
+  set(GZ_MSGS_VER ${gz-msgs9_VERSION_MAJOR})
+
+  message(STATUS "Compiling against Gazebo Garden")
+else()  
+  message(FATAL_ERROR "Unsupported GZ_VERSION: $ENV{GZ_VERSION}")
+endif()
+
+# find_package(gz_transport_vendor REQUIRED)
+# find_package(gz-transport REQUIRED)
+
+# find_package(gz_msgs_vendor REQUIRED)
+# find_package(gz-msgs REQUIRED)
 
 include_directories(include)
 
@@ -33,8 +67,8 @@ add_executable(${executable}
 )
 
 target_link_libraries(${executable}
-  gz-msgs::core
-  gz-transport::core
+  gz-msgs${GZ_MSGS_VER}::core
+  gz-transport${GZ_TRANSPORT_VER}::core
 )
 
 ament_target_dependencies(${executable}
