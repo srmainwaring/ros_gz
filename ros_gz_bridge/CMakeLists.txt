@@ -38,6 +38,17 @@ elseif("$ENV{GZ_VERSION}" STREQUAL "ionic")
   set(GZ_MSGS_VERSION_FULL ${gz-msgs11_VERSION})
 
   message(STATUS "Compiling against Gazebo Ionic")
+elseif("$ENV{GZ_VERSION}" STREQUAL "jetty")
+  # Jetty
+
+  find_package(gz-transport REQUIRED)
+  set(GZ_TRANSPORT_VER "")
+
+  find_package(gz-msgs REQUIRED)
+  set(GZ_MSGS_VER "")
+  set(GZ_MSGS_VERSION_FULL ${gz-msgs_VERSION})
+
+  message(STATUS "Compiling against Gazebo Jetty")
 elseif("$ENV{GZ_VERSION}" STREQUAL "garden")
   # Garden
 

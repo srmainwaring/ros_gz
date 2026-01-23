@@ -63,6 +63,11 @@
   <depend condition="$GZ_VERSION == ionic">gz-msgs11</depend>
   <depend condition="$GZ_VERSION == ionic">gz-sim9</depend>
   <depend condition="$GZ_VERSION == ionic">gz-transport14</depend>
+  <!-- Jetty -->
+  <depend condition="$GZ_VERSION == jetty">gz-math</depend>
+  <depend condition="$GZ_VERSION == jetty">gz-msgs</depend>
+  <depend condition="$GZ_VERSION == jetty">gz-sim</depend>
+  <depend condition="$GZ_VERSION == jetty">gz-transport</depend>
   <!-- Garden -->
   <depend condition="$GZ_VERSION == ionic">gz-math7</depend>
   <depend condition="$GZ_VERSION == ionic">gz-msgs9</depend>
