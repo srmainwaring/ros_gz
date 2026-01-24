@@ -11,7 +11,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 endif()
 
-# find_package(CLI11 REQUIRED)
+find_package(CLI11 REQUIRED)
 find_package(ament_cmake REQUIRED)
 find_package(builtin_interfaces REQUIRED)
 find_package(geometry_msgs REQUIRED)
@@ -127,12 +127,12 @@ add_library(${PROJECT_NAME}_delete_entity SHARED src/delete_entity.cpp)
 target_link_libraries(${PROJECT_NAME}_delete_entity
                       ${builtin_interfaces_TARGETS}
                       ${ros_gz_interfaces_TARGETS}
-                      rclcpp::rclcpp)
+                      rclcpp::rclcpp
+                      CLI11::CLI11)
 target_include_directories(
   ${PROJECT_NAME}_delete_entity
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include> ${CLI11_INCLUDE_DIRS})
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 # delete_entity
 add_executable(delete_entity src/delete_entity.cpp)
@@ -141,8 +141,8 @@ target_link_libraries(delete_entity ${PROJECT_NAME}_delete_entity
                       ${geometry_msgs_TARGETS}
                       ${ros_gz_interfaces_TARGETS}
                       ${simulation_intefaces_TARGETS}
-                      rclcpp::rclcpp)
-target_include_directories(delete_entity PUBLIC ${CLI11_INCLUDE_DIRS})
+                      rclcpp::rclcpp
+                      CLI11::CLI11)
 
 set(gz_simulation_interfaces_sources
   src/gz_simulation_interfaces/gazebo_proxy.cpp
@@ -198,12 +198,12 @@ target_link_libraries(${PROJECT_NAME}_spawn_entity
                       ${ros_gz_interfaces_TARGETS}
                       rclcpp::rclcpp
                       tf2::tf2
-                      tf2_ros::tf2_ros)
+                      tf2_ros::tf2_ros
+                      CLI11::CLI11)
 target_include_directories(
   ${PROJECT_NAME}_spawn_entity
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include> ${CLI11_INCLUDE_DIRS})
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 # set_entity_pose library
 add_library(${PROJECT_NAME}_set_entity_pose SHARED src/set_entity_pose.cpp)
@@ -213,12 +213,12 @@ target_link_libraries(${PROJECT_NAME}_set_entity_pose
                       ${ros_gz_interfaces_TARGETS}
                       rclcpp::rclcpp
                       tf2::tf2
-                      tf2_ros::tf2_ros)
+                      tf2_ros::tf2_ros
+                      CLI11::CLI11)
 target_include_directories(
   ${PROJECT_NAME}_set_entity_pose
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include> ${CLI11_INCLUDE_DIRS})
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 # project library (Stopwatch)
 add_library(${PROJECT_NAME} SHARED src/Stopwatch.cpp)
@@ -241,14 +241,14 @@ target_link_libraries(remove
 
 # set_entity_pose
 add_executable(set_entity_pose src/set_entity_pose.cpp)
-target_include_directories(set_entity_pose PUBLIC ${CLI11_INCLUDE_DIRS})
 target_link_libraries(set_entity_pose ${PROJECT_NAME}_set_entity_pose
                       ${builtin_interfaces_TARGETS}
                       ${geometry_msgs_TARGETS}
                       ${ros_gz_interfaces_TARGETS}
                       rclcpp::rclcpp
                       tf2::tf2
-                      tf2_ros::tf2_ros)
+                      tf2_ros::tf2_ros
+                      CLI11::CLI11)
 
 # spawn_entity executable
 add_executable(spawn_entity src/spawn_entity.cpp)
