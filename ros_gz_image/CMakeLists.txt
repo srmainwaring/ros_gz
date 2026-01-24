@@ -16,6 +16,12 @@ find_package(ros_gz_bridge REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
+find_package(tinyxml2_vendor REQUIRED)
+find_package(TinyXML2 REQUIRED)
+
+# Issue with upstream vendored targets - case difference
+add_library(TINYXML2::TINYXML2 ALIAS ${TinyXML2_LIBRARIES})
+
 if("$ENV{GZ_VERSION}" STREQUAL "harmonic" OR NOT DEFINED "ENV{GZ_VERSION}")
   # Harmonic (default)
 
