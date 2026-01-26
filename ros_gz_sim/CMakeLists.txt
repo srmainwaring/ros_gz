@@ -79,9 +79,9 @@ elseif("$ENV{GZ_VERSION}" STREQUAL "jetty")
   set(GZ_MSGS_VER "")
 
   find_package(gz-sim REQUIRED)
-  set(GZ_SIM_VER "")
+  set(GZ_SIM_VER ${gz-sim_VERSION_MAJOR})
 
-  message(STATUS "Compiling against Gazebo Jetty")
+  message(STATUS "Compiling against Gazebo Jetty (${GZ_SIM_VER})")
 elseif("$ENV{GZ_VERSION}" STREQUAL "garden")
   # Garden
 
